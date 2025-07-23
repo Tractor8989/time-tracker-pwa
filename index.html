@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <base target="_top">
+  <link rel="manifest" href="?manifest=true">
+  <meta name="theme-color" content="#2196F3">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+  <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=K2D|Prompt'>
+
+  <style>
+    html, body {
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      background: url("https://images.dmc.tv/wallpaper/raw/14180.jpg") no-repeat center center fixed;
+      background-size: cover;
+      color: white;
+      line-height: 1.6;
+    }
+    .wrapper {
+      background: rgba(255, 255, 255, 0.2);
+      width: 350px;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 15px;
+    }
+    .title {
+      background: rgba(0, 0, 0, 0.4);
+      padding: 10px 20px;
+      border-radius: 15px;
+      text-align: center;
+      font-family: 'Prompt', sans-serif;
+      font-size: 20px;
+      font-weight: 500;
+      color: #FFFFFF;
+      letter-spacing: 0.5px;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.7), 0 0 5px #00FFFF;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,0.2);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    }
+    .label-custom {
+      background: rgba(0, 0, 0, 0.4);
+      padding: 8px 16px;
+      border-radius: 12px;
+      text-align: center;
+      font-family: 'Prompt', sans-serif;
+      font-size: 16px;
+      font-weight: 500;
+      color: #FFFFFF;
+      letter-spacing: 0.5px;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.7), 0 0 5px #00FFFF;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,0.2);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+      margin-bottom: 10px;
+    }
+    .clock {
+      background: rgba(0, 0, 0, 0.3);
+      font-size: 25px;
+      padding: 10px 25px;
+      border-radius: 15px;
+      font-family: 'Digital dream Fat', monospace;
+      color: #00FFFF;
+      text-shadow: 0 0 3px #00FFFF, 0 0 10px #00CED1;
+    }
+    @font-face {
+      font-family: 'Digital dream Fat';
+      src: url('https://semicon.github.io/fonts/DigitaldreamFat.woff2') format('woff2'),
+           url('https://semicon.github.io/fonts/DigitaldreamFat.woff') format('woff');
+    }
+    .btn {
+      font-family: 'Prompt', sans-serif;
+      padding: 10px 20px;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      background: rgba(255, 255, 255, 0.15);
+      color: white;
+      text-shadow: 0 0 5px rgba(0,0,0,0.3);
+      box-shadow: 0 4px 30px rgba(0,0,0,0.1);
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
+      transition: all 0.3s ease;
+    }
+    .btn:hover {
+      background: rgba(255, 255, 255, 0.3);
+      color: #FFD700;
+    }
+    #searchUser, #user {
+      font-size: 14px;
+      padding: 5px 10px;
+      border-radius: 8px;
+      background: rgba(0, 0, 0, 0.5);
+      color: white;
+      border: 1px solid rgba(255,255,255,0.3);
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    #message {
+      background: rgba(255, 255, 255, 0.15);
+      color: #fff;
+      font-size: 16px;
+      padding: 15px 20px;
+      border-radius: 12px;
+      text-align: center;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      text-shadow: 0 0 5px rgba(0,0,0,0.5);
+      margin-top: 10px;
+    }
+  </style>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+</head>
+<body>
+
+<div class="wrapper text-center">
+
+<div class="title">
+  <div style="font-size: 22px; font-weight: 600;">ลงเวลาเข้าออกงาน</div>
+  <div style="font-size: 14px; font-weight: 400; margin-top: 4px;">โปรเจกต์-ของทีมทะเล</div>
+</div>
+
+<span id="MyClockDisplay" class="clock"></span>
+
+<form class="mt-4" onsubmit="return false;">
+  <div class="form-group">
+    <label for="searchUser" class="label-custom">ค้นหาชื่อ</label>
+    <input type="number" id="searchUser" class="form-control" placeholder="กรอกรหัสพนักงาน">
+  </div>
+
+  <div class="form-group">
+    <label for="user" class="label-custom">ชื่อพนักงาน</label>
+    <select class="form-control" id="user"></select>
+  </div>
+
+  <div class="form-group">
+    <input type="button" value="IN" class="btn btn-primary" onclick="ClockIn()" />
+    <input type="button" value="OUT" class="btn btn-warning" onclick="ClockOut()" />
+    <div id="message">รอการลงเวลา...</div>
+  </div>
+</form>
+
+</div>
+
+<script>
+var allUsers = [];
+
+$(document).ready(function() {
+  getData();
+  showTime();
+});
+
+function getData(){     
+  google.script.run.withSuccessHandler(function(ar) {
+    allUsers = ar.map(item => ({ id: item[0], name: item[1], display: item[0] + ' - ' + item[1] }));
+    renderUserList(allUsers);
+
+    $('#searchUser').on('keyup', function() {
+        var code = $(this).val().trim();
+
+        var matched = allUsers.find(user => user.id === code);
+
+        if(matched){
+          $('#user').val(matched.id);
+          // ไม่ต้องแสดงข้อความอะไร
+        } else {
+          $('#user').val('');
+          // ไม่ต้องแสดงข้อความอะไร
+        }
+      });
+
+  }).getData();
+}
+
+function renderUserList(list){
+  var userSelect = document.getElementById("user");
+  userSelect.innerHTML = "<option value=''>เลือกชื่อ</option>";
+  list.forEach(user => {
+    let option = document.createElement("option");
+    option.value = user.id;
+    option.text = user.display;
+    userSelect.appendChild(option);
+  });
+}
+
+function ClockIn(){
+  var user = $('#user').val();
+  var now = new Date().toISOString();
+
+  if(user){
+    google.script.run.withSuccessHandler(function(ar){
+      ar.forEach(item => {
+        $('#message').removeClass().addClass('alert');
+        if(item[0] == 'SUCCESS'){
+          $('#message').addClass('alert-primary').html(item[2] + '<br> เวลาเข้า ' + item[1]);
+        } else {
+          $('#message').addClass('alert-warning').html(item[2] + ' ' + item[0]);
+        }
+      });
+    }).clockIn(user, now);
+  }
+}
+
+function ClockOut(){
+  var user = $('#user').val();
+  var now = new Date().toISOString();
+
+  if(user){
+    google.script.run.withSuccessHandler(function(ar){
+      ar.forEach(item => {
+        $('#message').removeClass().addClass('alert');
+        if(item[0] == 'SUCCESS'){
+          $('#message').addClass('alert-primary').html(item[2] + '<br> เวลาออก ' + item[1]);
+        } else {
+          $('#message').addClass('alert-warning').html(item[2] + ' ' + item[0]);
+        }
+      });
+    }).clockOut(user, now);
+  }
+}
+
+function showTime() {
+  var date = new Date();
+  var h = date.getHours();
+  var m = String(date.getMinutes()).padStart(2, '0');
+  var s = String(date.getSeconds()).padStart(2, '0');
+  var session = "AM";
+
+  if (h == 0) h = 12;
+  else if (h >= 12) { session = "PM"; if (h > 12) h -= 12; }
+
+  h = String(h).padStart(2, '0');
+  document.getElementById("MyClockDisplay").innerText = `${h}:${m}:${s} ${session}`;
+  setTimeout(showTime, 1000);
+}
+</script>
+
+</body>
+</html>
